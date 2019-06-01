@@ -41,9 +41,9 @@ Map\<String title, bookInfo>
 
 ### Class Diagram
 
-|Main| |kaak|
-|:--- |:---
-|main()| |magkagmalgam|
-|just implements run()| |alaglakg|
+|Main|  
+|:---  
+|main()| 
+|just implements run()|
 
 
