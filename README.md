@@ -41,10 +41,10 @@ Map\<String title, bookInfo>
 
 ### Class Diagram
 
-|Main|kabosuBookDataMaker|  
-|:---|:---
-||HM\<ISBN,bookInfo>\nHM\<title,bookInfo>\ntempISBN,tempTitle\n|
-|main()|run()  function -e()  function -t or -i()  saveWithPOI()  forApacheCLI()|
-|just implements run|implements|
+|Main|kabosuBookDataMaker|searchThread|
+|:---|:---|:---
+||HM\<ISBN,bookInfo><br>HM\<title,bookInfo><br>tempISBN,tempTitle<br>|ISBN<br>title<br>bookInfo(custom datamodel)<br>hashMap|
+|main()|run()<br>function -e()<br>function -t or -i()<br>saveWithPOI()<br>forApacheCLI()|run()<br>int titleOrISBN()<br>searchWithAPI()<br>XMLparsingBookInfo()|
+|just implements run|implements and run threads|thread will do bothering job :)|
 
 
