@@ -7,12 +7,15 @@
  */
 
 plugins {
-    // Apply the java plugin to add support for Java
-    id 'java'
 
-    // Apply the application plugin to add support for building an application
-    id 'application'
+    id 'java-library'
 }
+
+apply pluguin : 'application'
+mainClassName = "edu.handong.kabosuMy3a.utils.Main"
+
+apply plugin: 'java'
+
 
 repositories {
     // Use jcenter for resolving your dependencies.
@@ -26,7 +29,8 @@ dependencies {
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
-}
 
-// Define the main class for the application
-mainClassName = 'ExcelFromISBN.App'
+    // https://mvnrepository.com/artifact/commons-cli/commons-cli
+    compile group: 'commons-cli', name: 'commons-cli', version: '1.4'
+
+}
