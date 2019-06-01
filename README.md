@@ -13,30 +13,32 @@ This program will make MS-Office Excel file searched by book ISBN or Title with 
 ### Functions
 
 With Apache commons cli, this program can choose functions you want use.  
-this program requires -o '\<outputfile> file path for saving output file.  
+this program requires -o \<outputfile> file path for saving output file.  
 
-Map'\<String ISBN, bookInfo>
-Map'\<String title, bookInfo>
-
-1. -e options: input data from keyboard(Scanner) 
-
-If you activate -e you can input ISBN code in cli. After that this program's threads will find bookInfo from naverAPI and printout in cli.  
-Then, threads save bookInfo in hashMap. you can use '/b'if you want to search by book name(e.g. /b "아침에는 죽음을 생각하는 것이 좋다").  
-'/d' will delete bookInfo which you find just now. '/delete all' will clear all bookInfo from hashMap. 
-With '/boxnumber '\<number>' you can set box number for arrange.  
-if you want make hashmap to Excel file or csv file '/save' or '/quit'.
+Map\<String ISBN, bookInfo>
+Map\<String title, bookInfo>
 
 
-2. -t or -i options : input data from textfile
+* -e options: input data from keyboard(Scanner) 
 
--t will require textfile which consist of book title.  
--i will require textfile which consist of ISBN.  
+	If you activate -e you can input ISBN code in cli. 
+	After that this program's threads will find bookInfo from naverAPI and printout in cli.  
+	Then, threads save bookInfo in hashMap. 
+	you can use '/b'if you want to search by book name(e.g. /b 아침에는 죽음을 생각하는 것이 좋다).  
+	'/d' will delete bookInfo which you find just now. '/delete all' will clear all bookInfo from hashMap. 
+	With '/boxnumber \<number>' you can set box number for arrange.  
+	if you want make hashmap to Excel file or csv file '/save' or '/quit'.
 
-Likewise fuction 1, it will save in HashMap and save it to Excel file or csv file.  
-If program can't find bookInfo, it will stack in errorlog.txt
+
+* -t or -i options : input data from textfile
+
+	-t will require textfile which consist of book title.  
+	-i will require textfile which consist of ISBN.  
+
+	Likewise fuction 1, it will save in HashMap and save it to Excel file or csv file.  
+	If program can't find bookInfo, it will stack in errorlog.txt
 
 
 ### Class Diagram
-
 
 
