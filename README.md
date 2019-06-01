@@ -1,16 +1,16 @@
-#kabosuBookDataMaker 
+# kabosuBookDataMaker 
 
 This program will make MS-Office Excel file searched by book ISBN or Title with Naver Search API.
 
 
-###Step
+### Step
 
 1. searching Book information with Naver API  
 2. parsing data with XML parser (Naver API gives data with XML or JSON format, but detail search applies only XML)  
 3. Save to EXCEL with Apache POI  
 
 
-###Functions
+### Functions
 
 With Apache commons cli, this program can choose functions you want use.  
 this program requires -o '\<outputfile> file path for saving output file.  
@@ -36,6 +36,7 @@ Likewise fuction 1, it will save in HashMap and save it to Excel file or csv fil
 If program can't find bookInfo, it will stack in errorlog.txt
 
 
-###Class Diagram
+### Class Diagram
+
 
 
