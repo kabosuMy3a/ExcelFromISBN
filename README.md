@@ -43,7 +43,7 @@ Map\<String title, bookInfo>
 
 |Main|kabosuBookDataMaker|  
 |:---|:---
-||HM\<ISBN,bookInfo>  HM\<title,bookInfo>  tempISBN,tempTitle|
+||HM\<ISBN,bookInfo>\nHM\<title,bookInfo>\ntempISBN,tempTitle\n|
 |main()|run()  function -e()  function -t or -i()  saveWithPOI()  forApacheCLI()|
 |just implements run|implements|
 
