@@ -23,7 +23,7 @@ Map\<String title, bookInfo>
 
 	If you activate -e you can input ISBN code in cli.   
 	After that this program's threads will find bookInfo from naverAPI and printout in cli.  
-	Then, threads save bookInfo in hashMap. If title is null || author is null don't save.
+	Then, threads save bookInfo in hashMap. If title is null || author is null don't save.  
 	you can use '/b'if you want to search by book name(e.g. /b 아침에는 죽음을 생각하는 것이 좋다).  
 	'/d' will delete bookInfo which you find just now. '/delete all' will clear all bookInfo from hashMap.   
 	With '/boxnumber \<number>' you can set box number for arrange.  
