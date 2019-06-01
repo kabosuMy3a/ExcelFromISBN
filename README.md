@@ -41,9 +41,10 @@ Map\<String title, bookInfo>
 
 ### Class Diagram
 
-|Main|  
-|:---  
-|main()| 
-|just implements run()|
+|Main|kabosuBookDataMaker|  
+|:---|:---
+||HM\<ISBN,bookInfo>  HM\<title,bookInfo>  tempISBN,tempTitle|
+|main()|run()  function -e()  function -t or -i()  saveWithPOI()  forApacheCLI()|
+|just implements run|implements|
 
 
