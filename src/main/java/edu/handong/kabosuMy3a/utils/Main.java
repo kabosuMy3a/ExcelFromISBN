@@ -6,6 +6,6 @@ public class Main{
 		
 		kabosuBookDataMaker kbdm = new kabosuBookDataMaker() ;
 		
-		kdbm.run(args);
+		kbdm.run(args);
 	}
 }
