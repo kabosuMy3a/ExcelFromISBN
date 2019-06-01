@@ -43,8 +43,13 @@ Map\<String title, bookInfo>
 
 |Main|kabosuBookDataMaker|searchThread|
 |:---|:---|:---
-||HM\<ISBN,bookInfo><br>HM\<title,bookInfo><br>tempISBN,tempTitle<br>|ISBN<br>title<br>bookInfo(custom datamodel)<br>hashMap|
+||HM\<ISBN,bookInfo><br>HM\<title,bookInfo><br>tempISBN,tempTitle<br>|ISBN<br>title<br>bookInfo(custom datamodel)<br>hashMap1(ISBN),2(title)\<synchronized|
 |main()|run()<br>function -e()<br>function -t or -i()<br>saveWithPOI()<br>forApacheCLI()|run()<br>int titleOrISBN()<br>searchWithAPI()<br>XMLparsingBookInfo()|
 |just implements run|implements and run threads|thread will do bothering job :)|
+
+|DataModel|useful|
+|bookINfo|customException|utils|
+|:---|:----|:---
+
 
 
