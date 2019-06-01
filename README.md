@@ -47,9 +47,13 @@ Map\<String title, bookInfo>
 |main()|run()<br>function -e()<br>function -t or -i()<br>saveWithPOI()<br>forApacheCLI()|run()<br>int titleOrISBN()<br>searchWithAPI()<br>XMLparsingBookInfo()|
 |just implements run|implements and run threads|thread will do bothering job :)|
 
-|DataModel|useful|useful|
-|bookINfo|customException|utils|
-|:---|:----|:---
+####Datamodel
+|bookINfo|
+|:---
+
+####useful
+customException|utils|
+|:---|:----
 
 
 
