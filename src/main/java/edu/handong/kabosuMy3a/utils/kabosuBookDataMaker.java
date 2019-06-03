@@ -45,12 +45,14 @@ public class kabosuBookDataMaker{
 		/* if you use getLines, exception handling doesn't be required.
 		* Exception handling was implemented in getLines.
 		*/
+		/*
 		if(titlePath != null){
 			titlelist = Utils.getLines(titlePath);
-			/*
-			 * run title search
-			 */
-		}
+			
+			//run title search
+			 
+		}*/
+		
 
 		if(ISBNPath != null){
 			ISBNlist = Utils.getLines(ISBNPath) ;
@@ -74,7 +76,7 @@ public class kabosuBookDataMaker{
 
 		Scanner keyboard = new Scanner(System.in);
 		String command;
-		String partition ="-------------------";
+		String partition ="--------------------------------------------";
 		int boxnumber = 0 ;
 
 		System.out.println("Input ISBN or \"/t Title\" you want find");
@@ -96,6 +98,7 @@ public class kabosuBookDataMaker{
 				System.out.println("\"/quit\" : save and quit");
 				System.out.println("\"q!\" : don't save and quit");
 				System.out.println(partition);
+
 			}
 			
 			else if(command.equals("q!")) break;
@@ -109,6 +112,7 @@ public class kabosuBookDataMaker{
 			else if(command.equals("/delete all")){
 				infoByTitle.clear();
 				infoByISBN.clear() ;
+				System.out.println("BookInfo deleted");
 			}
 			else if(command.equals("/save")){
 
@@ -120,10 +124,12 @@ public class kabosuBookDataMaker{
 				for(String line : infoByISBN.keySet()){
 					//System.out.println(line+"|| "+infoByISBN.get(line).show());
 				}
+				
 			}
 			else if(command.indexOf("/set boxnumber ")==0){
 				int index = command.indexOf(" ",5)+1 ;
 				boxnumber = Integer.parseInt(command.substring(index));
+				System.out.println("boxnumber set by "+command.substring(index));
 			}
 			else if(command.indexOf("/t ")==0){
 				int index = command.indexOf(" ")+1 ;
@@ -138,8 +144,10 @@ public class kabosuBookDataMaker{
 				 * search();
 				 */
 			}
+
 		}
 	}
+
 
 	private Options createOptions(){
 
@@ -158,12 +166,14 @@ public class kabosuBookDataMaker{
 			        .build());
 
 		//for function2
+		/*
 		options.addOption(Option.builder("t").longOpt("title")
 				.desc("Search by book title text file")
 				.hasArg()
 				.argName("Title text file Path")
 				.build());
-		
+		*/
+
 		options.addOption(Option.builder("I").longOpt("ISBN")
 				.desc("Search by book ISBN text file")
 				.hasArg()
@@ -198,7 +208,7 @@ public class kabosuBookDataMaker{
 
 			resultPath = cmd.getOptionValue("o");
 			cliMenu = cmd.hasOption("c");
-			titlePath = cmd.getOptionValue("t");
+			//titlePath = cmd.getOptionValue("t");
 			ISBNPath = cmd.getOptionValue("I");
 			help = cmd.hasOption("h");
 					

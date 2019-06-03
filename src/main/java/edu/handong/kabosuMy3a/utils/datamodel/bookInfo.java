@@ -14,9 +14,10 @@ public class bookInfo{
 	private String ISBN = null ;
 	private String price = null ;
 	private int boxnumber = 0x0;
-
+	private String etc = null;
 	private ArrayList<String> bookInfoToString ;
 	
+
 	public bookInfo(){
 	
 		bookInfoToString = new ArrayList<String>();
@@ -37,7 +38,11 @@ public class bookInfo{
 		this.publisher = publisher ;
 	}
 
-	public void setBookInfoToString(){
+	public void setBoxNumber(int boxnumber){
+		this.boxnumber = boxnumber;
+	}
+	/*
+	public void setBookInfoToList(){
 		
 		bookInfoToString = new ArrayList<String>();
 		bookInfoToString.add(title);
@@ -45,9 +50,15 @@ public class bookInfo{
 		bookInfoToString.add(publisher);
 	}
 
-	public ArrayList<String> getBookInfoToString(){
+	public ArrayList<String> getBookInfoToList(){
 
 		return bookInfoToString ;
+	}*/
+	
+	@Override
+	public String toString(){
+		
+		return title+","+author+","+publisher+","+year+","+ISBN+","+price+","+Integer.toString(boxnumber)+","+etc ;
 	}
 
 }
