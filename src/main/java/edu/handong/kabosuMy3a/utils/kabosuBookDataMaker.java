@@ -134,15 +134,13 @@ public class kabosuBookDataMaker{
 			else if(command.indexOf("/t ")==0){
 				int index = command.indexOf(" ")+1 ;
 				String titleForSearch = command.substring(index) ;
-				/*
-				 * search();
-				 */
+				Thread st = new Thread(new SearchThread(titleForSearch,1));
+				st.start();
 			}
 			else{
 				String ISBNForSearch = command ;
-				/*
-				 * search();
-				 */
+				Thread st = new Thread(new SearchThread(ISBNForSearch,2));
+			        st.start();	
 			}
 
 		}

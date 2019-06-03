@@ -10,7 +10,7 @@ public class bookInfo{
 	private String title = null ;
 	private String author = null ;
 	private String publisher = null ;
-	private int year = 0x0 ;
+	private String pubDate = null ;
 	private String ISBN = null ;
 	private String price = null ;
 	private int boxnumber = 0x0;
@@ -38,6 +38,21 @@ public class bookInfo{
 		this.publisher = publisher ;
 	}
 
+	public void setPubDate(String pubDate){
+
+		this.pubDate = pubDate ; 
+	}
+
+	public void setISBN(String ISBN){
+
+		this.ISBN = ISBN;
+	}
+	
+	public void setPrice(String price){
+		
+		this.price = price ;
+	}
+
 	public void setBoxNumber(int boxnumber){
 		this.boxnumber = boxnumber;
 	}
@@ -58,7 +73,9 @@ public class bookInfo{
 	@Override
 	public String toString(){
 		
-		return title+","+author+","+publisher+","+year+","+ISBN+","+price+","+Integer.toString(boxnumber)+","+etc ;
+		return title+"/"+author+"/"+publisher+"/"
+			+pubDate+"/"+ISBN+"/"+price+"/"
+			+Integer.toString(boxnumber)+"/"+etc ;
 	}
 
 }
