@@ -14,12 +14,12 @@ public class kabosuBookDataMaker{
 	//for convert excel file
 	private HashMap<String,bookInfo> infoByTitle ; 
 	private HashMap<String,bookInfo> infoByISBN ;
+	private ArrayList<bookInfo> searchedInfo ;
 	//from input File
 	private ArrayList<String> titlelist ;
 	private ArrayList<String> ISBNlist ;
 	//for Deletion
-	private String tempTitle ;
-	private String tempISBN ;
+	private String prvKeyword ;
 	//for Apache CLI
 	private String resultPath ;	
 	private boolean cliMenu ;
@@ -41,6 +41,7 @@ public class kabosuBookDataMaker{
 
 		infoByTitle = new HashMap<String,bookInfo>();
 		infoByISBN = new HashMap<String,bookInfo>();
+		searchedInfo = new ArrayList<bookInfo>();
 
 		/* if you use getLines, exception handling doesn't be required.
 		* Exception handling was implemented in getLines.
@@ -51,8 +52,12 @@ public class kabosuBookDataMaker{
 			
 			//run title search
 			 
-		}*/
+		}*/ //title search from file is not accurate.
+
 		
+		/* if you use getLines(custom), exception handling doesn't be required.
+		* Exception handling was implemented in getLines.
+		*/		
 
 		if(ISBNPath != null){
 			ISBNlist = Utils.getLines(ISBNPath) ;
@@ -83,7 +88,7 @@ public class kabosuBookDataMaker{
 		System.out.println(partition);
 		System.out.println("If you want help, input \"/help\"");
 		while(true){
-			
+				
 			command= keyboard.nextLine();
 
 			if(command.equals("/help")){
@@ -109,20 +114,36 @@ public class kabosuBookDataMaker{
 			else if(command.equals("/d")){
 			
 			}
+			else if(command.indexOf("/d ")==0){
+				/*
+				int index = command.indexOf(" ")+1;
+				String deletekey = command.substring(index);
+				bookInfo b,c;
+				b = infoByTitle.remove(deletekey);
+				c = infoByTitle.remove(deletekey);
+				if(b!= null || c !=null){
+					System.out.println(deletekey+" deleted");
+				}else System.out.println("delete failed");
+				*/
+			}
 			else if(command.equals("/delete all")){
+				searchedInfo.clear();
 				infoByTitle.clear();
 				infoByISBN.clear() ;
-				System.out.println("BookInfo deleted");
+				System.out.println("All book information deleted");
 			}
 			else if(command.equals("/save")){
 
 			}
 			else if(command.equals("/show")){
 				for(String line : infoByTitle.keySet()){
-					//System.out.println(line+"|| "+infoByTitle.get(line).show());
+					System.out.println(line+"|| "+infoByTitle.get(line).toString());
 				}
 				for(String line : infoByISBN.keySet()){
-					//System.out.println(line+"|| "+infoByISBN.get(line).show());
+					System.out.println(line+"|| "+infoByISBN.get(line).toString());
+				}
+				for(bookInfo b : searchedInfo){
+					System.out.println(b.toString());
 				}
 				
 			}
@@ -133,14 +154,18 @@ public class kabosuBookDataMaker{
 			}
 			else if(command.indexOf("/t ")==0){
 				int index = command.indexOf(" ")+1 ;
-				String titleForSearch = command.substring(index) ;
-				Thread st = new Thread(new SearchThread(titleForSearch,1));
+				String keyword = command.substring(index) ;
+				Thread st = new Thread(new SearchThread(searchedInfo,keyword,1,boxnumber));
 				st.start();
+				st.join();
+				prvKeyword = keyword ;
 			}
 			else{
-				String ISBNForSearch = command ;
-				Thread st = new Thread(new SearchThread(ISBNForSearch,2));
-			        st.start();	
+				String keyword = command ;
+				Thread st = new Thread(new SearchThread(searchedInfo,keyword,2,boxnumber));
+			        st.start();
+				st.join();	
+				prvKeyword = keyword ;
 			}
 
 		}

@@ -24,12 +24,15 @@ public class bookInfo{
 	}
 
 	public void setTitle(String title){
+	
+		title = title.replaceAll("\\<[^>]*>","");		
 
 		this.title = title;
 	}
 	
 	public void setAuthor(String author){
-		
+	
+		author = author.replaceAll("\\<[^>]*>","");	
 		this.author = author;
 	}
 

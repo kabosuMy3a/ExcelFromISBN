@@ -17,28 +17,75 @@ public class SearchThread implements Runnable{
 	private static String clientSecret = "bjFwkbK7Ay";
 	
 	private ArrayList<bookInfo> infoList ; 
-	String keyword ; 
-	int option = 0 ; 
+	private ArrayList<bookInfo> searchedInfo ;
+
+	private String keyword ; 
+	private int option = 0 ; 
+	private int boxnumber = 0 ;
 
 
-	public SearchThread(String keyword, int option){
+	public SearchThread(ArrayList<bookInfo> searchedInfo, String keyword, int option,int boxnumber){
 		
 		//option 0 : default(ISBN)
 		//option 1 : Title Search
 		//option 2 : ISBN Search 
 		this.option = option;
 		this.keyword = keyword;
+		this.boxnumber = boxnumber;
+		this.searchedInfo = searchedInfo ;
 		infoList = null ;
+		
 	}
-
 
 	@Override
 	public void run(){
 
 		searching();
+		
+		int index = 0 ;
 		for(bookInfo b : infoList){
-			
+			System.out.println(Integer.toString(++index));
 			System.out.println(b.toString());
+			System.out.println();	
+		}	
+
+		if(option == 1)/*title search*/{	
+			
+			bookInfo infoToReturn = null;
+
+			if (index > 1)/*searched result is more than 1*/{
+				System.out.print("*-input <one number> you want to save ");
+				System.out.println("if you don't want to save, input 0-*");
+				Scanner keyboard = new Scanner(System.in);
+				try{
+			    		int num = Integer.parseInt(keyboard.nextLine());
+					if(num !=0 && num <= infoList.size()){
+			    			infoToReturn = infoList.get(num-1);
+			    			System.out.print(Integer.toString(num)+" ");
+					}
+				}catch(Exception e){
+			    	System.out.println("**save failed  ");
+				}
+			
+			}else infoToReturn = infoList.get(0);
+
+			synchronized(searchedInfo){
+				if (infoToReturn != null){			
+					searchedInfo.add(infoToReturn);
+					System.out.println("saved successfully");
+				}	
+			}
+		}else/*ISBN Search*/{
+			int resultNum = 0;
+			synchronized(searchedInfo){
+				for(bookInfo bI : infoList){
+					searchedInfo.add(bI);
+					resultNum ++;
+					System.out.println((resultNum > 1
+							?Integer.toString(resultNum)+" "
+							:"")+"saved successfully"); 
+				}
+			}
 		}
 		return ;
 	}
@@ -83,10 +130,12 @@ public class SearchThread implements Runnable{
 					
 					case "item" : 
 						bI = new bookInfo();
+						bI.setBoxNumber(boxnumber);
 						break;
 					
 					case "title" :
-						if(bI != null) bI.setTitle(parser.nextText());							      break;
+						if(bI != null) bI.setTitle(parser.nextText());
+						break;
 					
 					case "author" :
 						if(bI != null) bI.setAuthor(parser.nextText());
