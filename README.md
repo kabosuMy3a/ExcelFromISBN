@@ -61,4 +61,12 @@ Map\<String title, bookInfo>
 |||
 |customException()<br>customException(String)|getline()<br>writeAfile()|
 
+---
+더 해야할 것
+
+README.md /help 기능 정리  
+첫 줄 옵션  
+price format  
+***thread & url error***  
+custom exception  
 

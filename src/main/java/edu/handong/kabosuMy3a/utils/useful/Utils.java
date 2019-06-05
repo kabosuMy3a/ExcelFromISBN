@@ -3,6 +3,14 @@ package edu.handong.kabosuMy3a.utils.useful ;
 import java.util.* ;
 import java.io.* ;
 
+import edu.handong.kabosuMy3a.utils.datamodel.bookInfo;
+
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+
+
 public class Utils{
 
 
@@ -34,7 +42,48 @@ public class Utils{
 		
 		return extractedList ;
 	}
+
 	
+	public static void saveWithPOI(ArrayList<bookInfo> searchedList, String targetFileName){
+	
+		if (searchedList.isEmpty()){
+		       	System.out.println("List is empty");
+			return;
+		}
+
+		XSSFWorkbook workbook = new XSSFWorkbook();
+		XSSFSheet sheet = workbook.createSheet();
+		
+		int rownum = 0;
+		ArrayList<String> rowInput ;
+		
+		for(bookInfo bI :searchedList){
+			
+			XSSFRow row = sheet.createRow(rownum++);
+			rowInput = bI.getBookInfoToList();
+				
+			int cellnum = 0;
+			for(String cellInput : rowInput){
+				XSSFCell cell = row.createCell(cellnum++);
+			       	cell.setCellValue(cellInput);
+			}	
+		}
+		try{
+			File file = new File(targetFileName) ;  
+                        File abFile = file.getAbsoluteFile();
+                        if(!abFile.getParentFile().exists()){
+                        	abFile.getParentFile().mkdirs();
+                        }
+			FileOutputStream out = new FileOutputStream(file);
+			workbook.write(out);
+			out.close();
+			System.out.println("Saved in "+targetFileName);
+		
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+
+	}	
 
 	public static void writeAFile(ArrayList<String> lines, String targetFileName){
 
@@ -45,7 +94,7 @@ public class Utils{
                         File abFile = file.getAbsoluteFile();
 
                         if(!abFile.getParentFile().exists()){
-                                        abFile.getParentFile().mkdirs();
+                        	abFile.getParentFile().mkdirs();
                         }
 
 

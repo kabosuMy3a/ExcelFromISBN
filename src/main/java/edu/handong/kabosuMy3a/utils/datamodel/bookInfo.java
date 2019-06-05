@@ -14,13 +14,13 @@ public class bookInfo{
 	private String ISBN = null ;
 	private String price = null ;
 	private int boxnumber = 0x0;
-	private String etc = null;
-	private ArrayList<String> bookInfoToString ;
+	private String etc = "";
+	private ArrayList<String> bookInfoToList ;
 	
 
 	public bookInfo(){
 	
-		bookInfoToString = new ArrayList<String>();
+		bookInfoToList= new ArrayList<String>();
 	}
 
 	public void setTitle(String title){
@@ -42,7 +42,7 @@ public class bookInfo{
 	}
 
 	public void setPubDate(String pubDate){
-
+		pubDate = pubDate.substring(0,4);
 		this.pubDate = pubDate ; 
 	}
 
@@ -59,26 +59,35 @@ public class bookInfo{
 	public void setBoxNumber(int boxnumber){
 		this.boxnumber = boxnumber;
 	}
-	/*
-	public void setBookInfoToList(){
+	
+	private void setBookInfoToList(){
 		
-		bookInfoToString = new ArrayList<String>();
-		bookInfoToString.add(title);
-		bookInfoToString.add(author);
-		bookInfoToString.add(publisher);
+		bookInfoToList = new ArrayList<String>();
+		bookInfoToList.add(null);
+		bookInfoToList.add(title);
+		bookInfoToList.add(author);
+		bookInfoToList.add(publisher);
+		bookInfoToList.add(null);
+		bookInfoToList.add(pubDate);
+		bookInfoToList.add(ISBN);
+		bookInfoToList.add(null);
+		bookInfoToList.add(null);
+		bookInfoToList.add(price);
+		bookInfoToList.add(Integer.toString(boxnumber));
+		//bookInfoToList.add(etc);
 	}
 
 	public ArrayList<String> getBookInfoToList(){
-
-		return bookInfoToString ;
-	}*/
+                setBookInfoToList();
+		return bookInfoToList ;
+	}
 	
 	@Override
 	public String toString(){
 		
 		return title+"/"+author+"/"+publisher+"/"
 			+pubDate+"/"+ISBN+"/"+price+"/"
-			+Integer.toString(boxnumber)+"/"+etc ;
+			+Integer.toString(boxnumber) ;
 	}
 
 }

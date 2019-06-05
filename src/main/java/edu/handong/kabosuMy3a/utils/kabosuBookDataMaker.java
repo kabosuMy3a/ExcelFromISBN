@@ -5,6 +5,8 @@ import edu.handong.kabosuMy3a.utils.useful.Utils ;
 
 import java.util.*;
 import java.io.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import org.apache.commons.cli.*;
 
@@ -38,7 +40,7 @@ public class kabosuBookDataMaker{
 		}else return;
 
 		searchedInfo = new ArrayList<bookInfo>();
-
+		
 		/* if you use getLines, exception handling doesn't be required.
 		* Exception handling was implemented in getLines.
 		*/
@@ -56,14 +58,17 @@ public class kabosuBookDataMaker{
 		*/		
 
 		if(ISBNPath != null){
+			int numOfCoresInMyCpu = Runtime.getRuntime().availableProcessors();
+
 			ISBNlist = Utils.getLines(ISBNPath) ;
 			
 			try{
-				searchWithFile();
+				searchWithFile(numOfCoresInMyCpu);
 			}catch(Exception e){
-				//e.printStackTrace();
+				e.printStackTrace();
 			}
-			saveWithoutPOI();
+			//saveWithoutPOI();
+			Utils.saveWithPOI(searchedInfo,resultPath);
 		}		
 		
 		if(cliMenu){	
@@ -76,21 +81,27 @@ public class kabosuBookDataMaker{
 
 	}
 
-	private void searchWithFile() throws Exception{
-
+	private void searchWithFile(int numOfCoresInMyCpu) throws Exception{
+		
+		ExecutorService executor = Executors.newFixedThreadPool(numOfCoresInMyCpu);
+		
 		ArrayList<Thread> tl = new ArrayList<Thread>();	
 		for(String ISBN : ISBNlist){
 			if(ISBN == null || ISBN.equals("\n")|| 
 					ISBN.equals("\r\n") || ISBN.equals("")) continue; 
 			Thread st = new Thread(new SearchThread(searchedInfo,ISBN,2,boxnumber));
 			st.start();
+			//executor.execute(st);
 			tl.add(st);
-			st.join();//because of NaverAPI...
-
+			st.join();
 		}
 		/*
 		for( Thread t : tl){
 			t.join();
+		}*/
+		/*
+		executor.shutdown();
+		while(!executor.isTerminated()){
 		}*/
 	}
 
@@ -173,13 +184,13 @@ public class kabosuBookDataMaker{
 				System.out.println("All book information deleted");
 			}
 			else if(command.equals("/save")){
-			
-				saveWithoutPOI();
+				Utils.saveWithPOI(searchedInfo,resultPath);
+				//saveWithoutPOI();
 			}
 			else if(command.indexOf("/save ")==0){
 				int index = command.indexOf(" ")+1;
-				saveWithoutPOI(command.substring(index));
-				
+				//saveWithoutPOI(command.substring(index));
+				Utils.saveWithPOI(searchedInfo,command.substring(index));
 			}
 
 			else if(command.equals("/show")){
