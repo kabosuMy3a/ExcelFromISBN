@@ -100,7 +100,7 @@ public class SearchThread implements Runnable{
 		URL url ;
 		int start = 0;
 		int display = 8;
-
+		URLConnection URLcon;
 		try{
 	    		if(option == 0 || option ==2){
 				url = new URL("https://openapi.naver.com/v1/search/book_adv.xml"
@@ -111,7 +111,7 @@ public class SearchThread implements Runnable{
 						+ (display != 0 ? "&display=" + display : "") 
 						+ (start != 0 ? "&start=" + start : ""));
 			}
-			URLConnection URLcon = url.openConnection();
+			URLcon = url.openConnection();
 			URLcon.setRequestProperty("X-naver-Client-Id", clientID);
 			URLcon.setRequestProperty("X-naver-Client-Secret", clientSecret);
 				
@@ -174,6 +174,8 @@ public class SearchThread implements Runnable{
 				
 				eventType = parser.next();
 			}
+
+		 	URLcon.getInputStream().close();
 	    	   }catch(XmlPullParserException e){
 			   e.printStackTrace();
 	    	   
@@ -181,6 +183,5 @@ public class SearchThread implements Runnable{
 			
 			   e.printStackTrace();
 		   }
-			   
 	}
 }

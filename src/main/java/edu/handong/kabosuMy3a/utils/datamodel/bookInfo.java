@@ -41,9 +41,11 @@ public class bookInfo{
 		this.publisher = publisher ;
 	}
 
-	public void setPubDate(String pubDate){
-		pubDate = pubDate.substring(0,4);
+	public void setPubDate(String pubDate){	
+		if(pubDate != null && pubDate.length() > 4)
+			pubDate = pubDate.substring(0,4);
 		this.pubDate = pubDate ; 
+
 	}
 
 	public void setISBN(String ISBN){

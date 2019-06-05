@@ -59,7 +59,6 @@ public class kabosuBookDataMaker{
 
 		if(ISBNPath != null){
 			int numOfCoresInMyCpu = Runtime.getRuntime().availableProcessors();
-
 			ISBNlist = Utils.getLines(ISBNPath) ;
 			
 			try{
@@ -83,26 +82,27 @@ public class kabosuBookDataMaker{
 
 	private void searchWithFile(int numOfCoresInMyCpu) throws Exception{
 		
-		ExecutorService executor = Executors.newFixedThreadPool(numOfCoresInMyCpu);
+		ExecutorService executor = Executors.newFixedThreadPool(1);
 		
 		ArrayList<Thread> tl = new ArrayList<Thread>();	
 		for(String ISBN : ISBNlist){
 			if(ISBN == null || ISBN.equals("\n")|| 
 					ISBN.equals("\r\n") || ISBN.equals("")) continue; 
 			Thread st = new Thread(new SearchThread(searchedInfo,ISBN,2,boxnumber));
-			st.start();
-			//executor.execute(st);
+			//st.start();
+			executor.execute(st);
+			st.sleep(150);
 			tl.add(st);
-			st.join();
+			//st.join();
 		}
 		/*
 		for( Thread t : tl){
 			t.join();
 		}*/
-		/*
+		
 		executor.shutdown();
 		while(!executor.isTerminated()){
-		}*/
+		}
 	}
 
 	private void saveWithoutPOI(){
