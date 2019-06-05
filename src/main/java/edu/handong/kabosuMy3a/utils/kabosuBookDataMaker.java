@@ -12,8 +12,6 @@ import org.apache.commons.cli.*;
 public class kabosuBookDataMaker{
 	
 	//for convert excel file
-	private HashMap<String,bookInfo> infoByTitle ; 
-	private HashMap<String,bookInfo> infoByISBN ;
 	private ArrayList<bookInfo> searchedInfo ;
 	//from input File
 	private ArrayList<String> titlelist ;
@@ -23,10 +21,10 @@ public class kabosuBookDataMaker{
 	//for Apache CLI
 	private String resultPath ;	
 	private boolean cliMenu ;
-	private String titlePath;
+	//private String titlePath;
 	private String ISBNPath;
 	private boolean help;
-
+	private int boxnumber = 0 ;
 
 	public void run(String[] args){
 
@@ -39,8 +37,6 @@ public class kabosuBookDataMaker{
 			}	
 		}else return;
 
-		infoByTitle = new HashMap<String,bookInfo>();
-		infoByISBN = new HashMap<String,bookInfo>();
 		searchedInfo = new ArrayList<bookInfo>();
 
 		/* if you use getLines, exception handling doesn't be required.
@@ -61,9 +57,13 @@ public class kabosuBookDataMaker{
 
 		if(ISBNPath != null){
 			ISBNlist = Utils.getLines(ISBNPath) ;
-		       /*
-			*  run ISBN search
-			*/	
+			
+			try{
+				searchWithFile();
+			}catch(Exception e){
+				//e.printStackTrace();
+			}
+			saveWithoutPOI();
 		}		
 		
 		if(cliMenu){	
@@ -76,13 +76,52 @@ public class kabosuBookDataMaker{
 
 	}
 
+	private void searchWithFile() throws Exception{
+
+		ArrayList<Thread> tl = new ArrayList<Thread>();	
+		for(String ISBN : ISBNlist){
+			if(ISBN == null || ISBN.equals("\n")|| 
+					ISBN.equals("\r\n") || ISBN.equals("")) continue; 
+			Thread st = new Thread(new SearchThread(searchedInfo,ISBN,2,boxnumber));
+			st.start();
+			tl.add(st);
+			st.join();//because of NaverAPI...
+
+		}
+		/*
+		for( Thread t : tl){
+			t.join();
+		}*/
+	}
+
+	private void saveWithoutPOI(){
+
+		ArrayList<String> forSave = new ArrayList<String>();
+		for(bookInfo b : searchedInfo){
+			forSave.add(b.toString());
+		}
+		Utils.writeAFile(forSave,resultPath);
+		System.out.println("Saved in "+ resultPath);
+
+	}
+
+	private void saveWithoutPOI(String savePath){
+
+		ArrayList<String> forSave = new ArrayList<String>();
+		for(bookInfo b : searchedInfo){
+			forSave.add(b.toString());
+		}
+		Utils.writeAFile(forSave,savePath);
+		System.out.println("Saved in "+ savePath);
+	}
+
+
 
 	private void searchWithCLI() throws Exception {
 
 		Scanner keyboard = new Scanner(System.in);
 		String command;
 		String partition ="--------------------------------------------";
-		int boxnumber = 0 ;
 
 		System.out.println("Input ISBN or \"/t Title\" you want find");
 		System.out.println(partition);
@@ -95,7 +134,7 @@ public class kabosuBookDataMaker{
 				System.out.println(partition);
 				System.out.println("Input ISBN code to find book Info");
 				System.out.println("\"/t <Book Title>\" : book info by Title Search");
-				System.out.println("\"/d\" : delete book Info you find just now");
+				System.out.println("\"/d <index>\" : delete book Info by index which you can check with \"/show\"");
 				System.out.println("\"/delete all\" : clear all book Info");
 				System.out.println("\"/save\" : save bookInfo to excel file");
 				System.out.println("\"/set boxnumber <num>\" : set boxnumber in bookInfo");
@@ -111,38 +150,43 @@ public class kabosuBookDataMaker{
 				//save();
 				break;
 			}
-			else if(command.equals("/d")){
-			
-			}
 			else if(command.indexOf("/d ")==0){
-				/*
-				int index = command.indexOf(" ")+1;
-				String deletekey = command.substring(index);
-				bookInfo b,c;
-				b = infoByTitle.remove(deletekey);
-				c = infoByTitle.remove(deletekey);
-				if(b!= null || c !=null){
-					System.out.println(deletekey+" deleted");
-				}else System.out.println("delete failed");
-				*/
+				try{
+					int deleteline = Integer.parseInt(command.substring(command.indexOf(" ")+1)) ; 
+					if(deleteline < 1 || deleteline > searchedInfo.size()){
+						throw new Exception("input number within line size");
+					}
+					else{
+						searchedInfo.remove(deleteline-1);
+						System.out.println(Integer.toString(deleteline)+" line removed");
+					}
+
+				}catch(NumberFormatException e){
+				 	System.out.println("please input number next time"); 
+				}catch(Exception e){
+					System.out.println(e);
+				}
+				
 			}
 			else if(command.equals("/delete all")){
 				searchedInfo.clear();
-				infoByTitle.clear();
-				infoByISBN.clear() ;
 				System.out.println("All book information deleted");
 			}
 			else if(command.equals("/save")){
-
+			
+				saveWithoutPOI();
 			}
+			else if(command.indexOf("/save ")==0){
+				int index = command.indexOf(" ")+1;
+				saveWithoutPOI(command.substring(index));
+				
+			}
+
 			else if(command.equals("/show")){
-				for(String line : infoByTitle.keySet()){
-					System.out.println(line+"|| "+infoByTitle.get(line).toString());
-				}
-				for(String line : infoByISBN.keySet()){
-					System.out.println(line+"|| "+infoByISBN.get(line).toString());
-				}
+				System.out.println("you found "+searchedInfo.size()+" informations");
+				int lineNum = 0;	
 				for(bookInfo b : searchedInfo){
+					System.out.print(Integer.toString(++lineNum)+". ");
 					System.out.println(b.toString());
 				}
 				
@@ -183,19 +227,17 @@ public class kabosuBookDataMaker{
 				.argName("Output path")
 				.required()
 				.build());
-		//for function1 
 		options.addOption(Option.builder("c").longOpt("cli")
 			        .desc("Search by CLI menu")	
 			        .build());
 
-		//for function2
-		/*
-		options.addOption(Option.builder("t").longOpt("title")
-				.desc("Search by book title text file")
+		
+		options.addOption(Option.builder("b").longOpt("boxnumber")
+				.desc("Set boxnumber")
 				.hasArg()
-				.argName("Title text file Path")
+				.argName("Box number for arrange")
 				.build());
-		*/
+		
 
 		options.addOption(Option.builder("I").longOpt("ISBN")
 				.desc("Search by book ISBN text file")
@@ -231,7 +273,7 @@ public class kabosuBookDataMaker{
 
 			resultPath = cmd.getOptionValue("o");
 			cliMenu = cmd.hasOption("c");
-			//titlePath = cmd.getOptionValue("t");
+			if(cmd.hasOption("b")) boxnumber = Integer.parseInt(cmd.getOptionValue("b"));
 			ISBNPath = cmd.getOptionValue("I");
 			help = cmd.hasOption("h");
 					

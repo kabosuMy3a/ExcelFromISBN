@@ -43,6 +43,11 @@ public class SearchThread implements Runnable{
 		searching();
 		
 		int index = 0 ;
+		
+		if(infoList == null){
+			return;
+		}
+
 		for(bookInfo b : infoList){
 			System.out.println(Integer.toString(++index));
 			System.out.println(b.toString());
@@ -169,7 +174,6 @@ public class SearchThread implements Runnable{
 				
 				eventType = parser.next();
 			}
-			
 	    	   }catch(XmlPullParserException e){
 			   e.printStackTrace();
 	    	   
@@ -177,6 +181,6 @@ public class SearchThread implements Runnable{
 			
 			   e.printStackTrace();
 		   }
-	
+			   
 	}
 }
