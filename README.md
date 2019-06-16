@@ -52,22 +52,22 @@ this program requires -o \<outputfile> file path for saving output file.
 ||
 
 ##### useful
-|customException|utils|
+|searchFailedException|utils|
 |:---|:----
 |||
-|customException()<br>customException(String)|getline()<br>writeAfile()|
+|customException()<br>customException(String)|getlines()<br>savedWithPOI()<br>writeAfile()|
 
 ---
 더 해야할 것
 
-README.md /help 기능 정리  
+~README.md /help 기능 정리~  
 첫 줄 옵션  
 price format  
-***thread & url error***  
-custom exception  
+~***thread & url error***~  
+~custom exception~  
 ISBN 둘다 있으면 하나만 
 generics
-/save csv 
+~/save csv~
 
 ---
 에러:
