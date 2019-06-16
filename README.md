@@ -1,6 +1,6 @@
 # kabosuBookDataMaker 
 
-This program will make MS-Office Excel file searched by book ISBN or Title with Naver Search API.
+This program will make MS-Office Excel file searched by book ISBN or Title with Naver Search API.  
 This program is customized for me, for examples, result data's format of xlsx file.
 
 ### Step
@@ -21,13 +21,13 @@ this program requires -o \<outputfile> file path for saving output file.
 
 	If you activate -c you can input ISBN code in cli.   
 	After that this program's threads will find bookInfo from naverAPI and printout in cli.  
-	Then, threads save bookInfo in ArrayList.	
-	you can use '/t' also if you want to search by book name(e.g. /t 아침에는 죽음을 생각하는 것이 좋다).  
+	Then, threads save bookInfo in ArrayList.  
+	you can use '/t' also if you want to search by book name(e.g. /t 아침에는 죽음을 생각).  
 	
 	please input '/help' first, then you can check all cli functions. 
 
 
-* -I \<file name> options : input data from textfile
+* -I(upper case of i) \<file name> options : input data from textfile
 
 	-I will require textfile which consist of ISBN.  
 	Each line is only ISBN code in textfile.  
@@ -49,7 +49,7 @@ this program requires -o \<outputfile> file path for saving output file.
 |bookInfo|
 |:---
 |title<br>author<br>publisher<br>pubdate<br>ISBN<br>price<br>boxnumber<br>bookInfoToList<br>|
-|setter&getter()<br>toString()<br>setter&gettter BookInfoToList()|
+|setter&getter()<br>toString()<br>setter&getter BookInfoToList()|
 
 ##### useful
 |searchFailedException|utils|
@@ -65,7 +65,7 @@ this program requires -o \<outputfile> file path for saving output file.
 price format  
 ~***thread & url error***~  
 ~custom exception~  
-ISBN 둘다 있으면 하나만 
+ISBN 둘다 있으면 하나만  
 generics  
 ~/save csv~
 
