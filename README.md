@@ -71,4 +71,16 @@ price format
 custom exception  
 ISBN 둘다 있으면 하나만 
 generics
-/save csv  
+/save csv 
+
+---
+에러:
+
+distribuiton으로 만든 bat파일로 실행할 때 (window CMD창에서)  
+리눅스에서는 모두 정상적으로 돌아감.  
+
+
+1. thread가 높은 확률로 접속이 안됨  
+2. 책 검색 결과가 한글일 때 깨짐...  
+~3. jar로 실행할 때 MainClass를 못찾는 문제(리눅스에서도)~ build.gradle 세팅으로 해결
+ 

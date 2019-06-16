@@ -16,6 +16,14 @@ mainClassName = "edu.handong.kabosuMy3a.utils.Main"
 
 apply plugin: 'java'
 
+jar {
+	manifest {
+		attributes(
+			'Main-Class': 'edu.handong.kabosuMy3a.utils.Main'
+		)
+	}
+}
+
 run{
 	standardInput = System.in
 }

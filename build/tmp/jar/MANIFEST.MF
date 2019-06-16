@@ -1,2 +1,3 @@
 Manifest-Version: 1.0
+Main-Class: edu.handong.kabosuMy3a.utils.Main
 
