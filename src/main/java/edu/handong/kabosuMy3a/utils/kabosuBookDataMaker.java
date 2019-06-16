@@ -16,10 +16,7 @@ public class kabosuBookDataMaker{
 	//for convert excel file
 	private ArrayList<bookInfo> searchedInfo ;
 	//from input File
-	private ArrayList<String> titlelist ;
 	private ArrayList<String> ISBNlist ;
-	//for Deletion
-	private String prvKeyword ;
 	//for Apache CLI
 	private String resultPath ;	
 	private boolean cliMenu ;
@@ -204,14 +201,16 @@ public class kabosuBookDataMaker{
 				Thread st = new Thread(new SearchThread(searchedInfo,keyword,1,boxnumber));
 				st.start();
 				st.join();
-				prvKeyword = keyword ;
 			}
+
+			else if(command.indexOf("/")==0){
+				System.out.println("wrong command, check /help");
+			}
+
 			else{
 				String keyword = command ;
 				Thread st = new Thread(new SearchThread(searchedInfo,keyword,2,boxnumber));
 			        st.start();
-				st.join();	
-				prvKeyword = keyword ;
 			}
 
 		}

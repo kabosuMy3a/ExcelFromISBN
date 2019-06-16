@@ -1,7 +1,7 @@
 # kabosuBookDataMaker 
 
 This program will make MS-Office Excel file searched by book ISBN or Title with Naver Search API.
-
+This program is customized for me, for examples, result data's format of xlsx file.
 
 ### Step
 
@@ -41,21 +41,21 @@ this program requires -o \<outputfile> file path for saving output file.
 
 |Main|kabosuBookDataMaker|searchThread|
 |:---|:---|:---
-||HM\<ISBN,bookInfo><br>HM\<title,bookInfo><br>tempISBN,tempTitle<br>|ISBN<br>title<br>bookInfo(custom datamodel)<br>hashMap1(ISBN),2(title)\<synchronized|
-|main()|run()<br>function -e()<br>function -t or -i()<br>saveWithPOI()<br>forApacheCLI()|run()<br>int titleOrISBN()<br>searchWithAPI()<br>XMLparsingBookInfo()|
+||searchedList<br>ISBNlist<br>resultpath<br>ISBNPath<br>boolean cliMenu<br>boxnumber|keyword<br>bookInfo(custom datamodel)<br>synchronized searchedList|
+|main()|run()<br>function -c()<br>function -i()<br>saveWithPOI()<br>forApacheCLI()|run()<br>searchWithAPI()<br>XMLparsingBookInfo()|
 |just implements run|implements and run threads|thread will do bothering job :)|
 
 ##### Datamodel
 |bookInfo|
 |:---
-|title<br>author<br>company<br>year<br>ISBN<br>price<br>boxnumber<br>|
-||
+|title<br>author<br>publisher<br>pubdate<br>ISBN<br>price<br>boxnumber<br>bookInfoToList<br>|
+|setter&getter()<br>toString()<br>setter&gettter BookInfoToList()|
 
 ##### useful
 |searchFailedException|utils|
 |:---|:----
 |||
-|customException()<br>customException(String)|getlines()<br>savedWithPOI()<br>writeAfile()|
+|searchFailedException()<br>searchFailedException(String)|getLines()<br>savedWithPOI()<br>writeAfile()|
 
 ---
 더 해야할 것
@@ -66,7 +66,7 @@ price format
 ~***thread & url error***~  
 ~custom exception~  
 ISBN 둘다 있으면 하나만 
-generics
+generics  
 ~/save csv~
 
 ---
@@ -77,6 +77,4 @@ distribuiton으로 만든 bat파일로 실행할 때 (window CMD창에서)
 
 
 1. thread가 높은 확률로 접속이 안됨  
-2. 책 검색 결과가 한글일 때 깨짐...  
-~3. jar로 실행할 때 MainClass를 못찾는 문제(리눅스에서도)~ build.gradle 세팅으로 해결
- 
+2. 책 검색 결과가 한글일 때 깨짐...   
