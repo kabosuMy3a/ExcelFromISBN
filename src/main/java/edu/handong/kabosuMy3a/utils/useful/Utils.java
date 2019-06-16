@@ -98,15 +98,15 @@ public class Utils{
                         }
 
 
-                        //if(!file.exists()){
+                        if(!file.exists()){
                                 outputStream = new PrintWriter(targetFileName);
-                        //}
-			/*
+                        }
+			
                         else{
                                 FileWriter filewriter = new FileWriter(targetFileName, true);
                                 outputStream = new PrintWriter(filewriter);
 
-                        }*/
+                        }
 
                 }
 

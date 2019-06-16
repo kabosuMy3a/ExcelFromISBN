@@ -44,18 +44,6 @@ public class kabosuBookDataMaker{
 		/* if you use getLines, exception handling doesn't be required.
 		* Exception handling was implemented in getLines.
 		*/
-		/*
-		if(titlePath != null){
-			titlelist = Utils.getLines(titlePath);
-			
-			//run title search
-			 
-		}*/ //title search from file is not accurate.
-
-		
-		/* if you use getLines(custom), exception handling doesn't be required.
-		* Exception handling was implemented in getLines.
-		*/		
 
 		if(ISBNPath != null){
 			int numOfCoresInMyCpu = Runtime.getRuntime().availableProcessors();
@@ -105,6 +93,7 @@ public class kabosuBookDataMaker{
 		}
 	}
 
+	/*
 	private void saveWithoutPOI(){
 
 		ArrayList<String> forSave = new ArrayList<String>();
@@ -124,7 +113,7 @@ public class kabosuBookDataMaker{
 		}
 		Utils.writeAFile(forSave,savePath);
 		System.out.println("Saved in "+ savePath);
-	}
+	}*/ 
 
 
 
@@ -148,6 +137,7 @@ public class kabosuBookDataMaker{
 				System.out.println("\"/d <index>\" : delete book Info by index which you can check with \"/show\"");
 				System.out.println("\"/delete all\" : clear all book Info");
 				System.out.println("\"/save\" : save bookInfo to excel file");
+				System.out.println("\"/save <file name>\" : save bookInfo to <excel file>");
 				System.out.println("\"/set boxnumber <num>\" : set boxnumber in bookInfo");
 				System.out.println("\"/show\" : show bookInfo you found");
 				System.out.println("\"/quit\" : save and quit");
@@ -158,7 +148,8 @@ public class kabosuBookDataMaker{
 			
 			else if(command.equals("q!")) break;
 			else if(command.equals("/quit")){
-				//save();
+				
+				Utils.saveWithPOI(searchedInfo,resultPath);
 				break;
 			}
 			else if(command.indexOf("/d ")==0){

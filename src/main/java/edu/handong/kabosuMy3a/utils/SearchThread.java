@@ -9,6 +9,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory ;
 
 import edu.handong.kabosuMy3a.utils.datamodel.bookInfo ;
+import edu.handong.kabosuMy3a.utils.useful.* ;
 
 public class SearchThread implements Runnable{
 
@@ -43,10 +44,18 @@ public class SearchThread implements Runnable{
 		searching();
 		
 		int index = 0 ;
+			
+		try{
+			if(infoList.isEmpty()) throw new searchFailedException() ;
 		
-		if(infoList == null){
+		}catch(searchFailedException e){
+			ArrayList<String> errorlog = new ArrayList<String>() ;
+			errorlog.add(keyword);
+			Utils.writeAFile(errorlog,"errorlog.txt") ;
+			System.out.println(e.getMessage());
 			return;
 		}
+
 
 		for(bookInfo b : infoList){
 			System.out.println(Integer.toString(++index));
@@ -176,6 +185,7 @@ public class SearchThread implements Runnable{
 			}
 
 		 	URLcon.getInputStream().close();
+		   	
 	    	   }catch(XmlPullParserException e){
 			   e.printStackTrace();
 	    	   

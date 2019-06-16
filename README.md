@@ -14,29 +14,25 @@ This program will make MS-Office Excel file searched by book ISBN or Title with 
 
 With Apache commons cli, this program can choose functions you want use.  
 this program requires -o \<outputfile> file path for saving output file.  
-
-Map\<String ISBN, bookInfo>
-Map\<String title, bookInfo>
+#### Should input -o \<\*.xlsx> format.
 
 
-* -e options: input data from keyboard(Scanner) 
+* -c options: input data from keyboard(Scanner) 
 
-	If you activate -e you can input ISBN code in cli.   
+	If you activate -c you can input ISBN code in cli.   
 	After that this program's threads will find bookInfo from naverAPI and printout in cli.  
-	Then, threads save bookInfo in hashMap. If title is null || author is null don't save.  
-	you can use '/b'if you want to search by book name(e.g. /b 아침에는 죽음을 생각하는 것이 좋다).  
-	'/d' will delete bookInfo which you find just now. '/delete all' will clear all bookInfo from hashMap.   
-	With '/boxnumber \<number>' you can set box number for arrange.  
-	if you want make hashmap to Excel file or csv file '/save' or '/quit'.  
+	Then, threads save bookInfo in ArrayList.	
+	you can use '/t' also if you want to search by book name(e.g. /t 아침에는 죽음을 생각하는 것이 좋다).  
+	
+	please input '/help' first, then you can check all cli functions. 
 
 
-* -t or -i options : input data from textfile
+* -I \<file name> options : input data from textfile
 
-	-t will require textfile which consist of book title.  
-	-i will require textfile which consist of ISBN.  
+	-I will require textfile which consist of ISBN.  
+	Each line is only ISBN code in textfile.  
 
-	Likewise fuction 1, it will save in HashMap and save it to Excel file or csv file.  
-	If program can't find bookInfo, it will stack in errorlog.txt  
+	Likewise fuction 1, it will save in ArrayList and save it to Excel file.  
 
 
 ### Class Diagram
