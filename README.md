@@ -60,12 +60,12 @@ this program requires -o \<outputfile> file path for saving output file.
 ---
 더 해야할 것
 
-~README.md /help 기능 정리~  
-첫 줄 옵션  
-price format  
+~README.md /help 기능 정리~    
+~first line~
+~price format~
 ~***thread & url error***~  
 ~custom exception~  
-ISBN 둘다 있으면 하나만  
+~ISBN 둘다 있으면 하나만~  
 generics  
 ~/save csv~
 

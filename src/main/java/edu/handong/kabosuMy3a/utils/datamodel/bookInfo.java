@@ -1,7 +1,7 @@
 package edu.handong.kabosuMy3a.utils.datamodel ;
 
 import java.util.* ;
-
+import java.text.NumberFormat;
 
 
 public class bookInfo{
@@ -50,12 +50,28 @@ public class bookInfo{
 
 	public void setISBN(String ISBN){
 
+		int space = ISBN.indexOf(" ");
+		if (space > 0 && ISBN.charAt(space+1)=='9'){
+			ISBN = ISBN.substring(space+1);
+		}
+		else if(space > 0){
+			ISBN = ISBN.substring(0,space);
+		}
 		this.ISBN = ISBN;
+
 	}
 	
 	public void setPrice(String price){
 		
-		this.price = price ;
+		
+		try{
+			int priceInt = Integer.parseInt(price);
+			NumberFormat nf = NumberFormat.getInstance(new Locale("ko","KR"));
+			this.price = nf.format(priceInt);
+		}catch (Exception e){
+			this.price = price ;
+		}
+
 	}
 
 	public void setBoxNumber(int boxnumber){
@@ -75,8 +91,8 @@ public class bookInfo{
 		bookInfoToList.add(null);
 		bookInfoToList.add(null);
 		bookInfoToList.add(price);
+		bookInfoToList.add(null);
 		bookInfoToList.add(Integer.toString(boxnumber));
-		//bookInfoToList.add(etc);
 	}
 
 	public ArrayList<String> getBookInfoToList(){

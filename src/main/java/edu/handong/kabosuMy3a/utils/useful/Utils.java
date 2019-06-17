@@ -55,14 +55,27 @@ public class Utils{
 		XSSFSheet sheet = workbook.createSheet();
 		
 		int rownum = 0;
-		ArrayList<String> rowInput ;
+		ArrayList<String> rowInput = new ArrayList<String>() ;
+		rowInput.add("No"); rowInput.add("Title"); rowInput.add("Author"); 
+		rowInput.add("Publisher"); rowInput.add("EA"); rowInput.add("Pub-Year"); 
+		rowInput.add("ISBN"); rowInput.add("Donator"); rowInput.add("Donate-Date"); 
+		rowInput.add("Price"); rowInput.add("etc"); rowInput.add("boxnumber");
 		
+		XSSFRow row = sheet.createRow(rownum++);
+		int cellnum = 0;
+		for(String cellInput : rowInput){
+			XSSFCell cell = row.createCell(cellnum++) ;
+			cell.setCellValue(cellInput);
+		}
+		rowInput = null;
+
+		//XSSFCell cell = row.createCell(cellnum++);	
 		for(bookInfo bI :searchedList){
 			
-			XSSFRow row = sheet.createRow(rownum++);
+			row = sheet.createRow(rownum++);
 			rowInput = bI.getBookInfoToList();
 				
-			int cellnum = 0;
+			cellnum = 0;
 			for(String cellInput : rowInput){
 				XSSFCell cell = row.createCell(cellnum++);
 			       	cell.setCellValue(cellInput);

@@ -76,7 +76,7 @@ public class kabosuBookDataMaker{
 			Thread st = new Thread(new SearchThread(searchedInfo,ISBN,2,boxnumber));
 			//st.start();
 			executor.execute(st);
-			st.sleep(150);
+			st.sleep(175);
 			tl.add(st);
 			//st.join();
 		}
