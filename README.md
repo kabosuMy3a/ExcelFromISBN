@@ -51,6 +51,13 @@ this program requires -o \<outputfile> file path for saving output file.
 |title<br>author<br>publisher<br>pubdate<br>ISBN<br>price<br>boxnumber<br>bookInfoToList<br>|
 |setter&getter()<br>toString()<br>setter&getter BookInfoToList()|
 
+
+####3 collections
+|LinkedStack\<T>|
+|:---
+|class ListNode\<T>(innerClass)<br>top<br>count<br>|
+|LinkedStack()<br>push(T)<br>T pop() <br> boolean isEmpty()|
+
 ##### useful
 |searchFailedException|utils|
 |:---|:----
