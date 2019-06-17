@@ -52,7 +52,7 @@ this program requires -o \<outputfile> file path for saving output file.
 |setter&getter()<br>toString()<br>setter&getter BookInfoToList()|
 
 
-####3 collections
+##### collections  
 |LinkedStack\<T>|
 |:---
 |class ListNode\<T>(innerClass)<br>top<br>count<br>|
