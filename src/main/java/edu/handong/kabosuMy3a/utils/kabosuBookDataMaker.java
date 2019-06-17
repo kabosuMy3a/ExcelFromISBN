@@ -2,6 +2,7 @@ package edu.handong.kabosuMy3a.utils ;
 
 import edu.handong.kabosuMy3a.utils.datamodel.bookInfo;
 import edu.handong.kabosuMy3a.utils.useful.Utils ;
+import edu.handong.kabosuMy3a.utils.collections.LinkedStack;
 
 import java.util.*;
 import java.io.*;
@@ -15,6 +16,7 @@ public class kabosuBookDataMaker{
 	
 	//for convert excel file
 	private ArrayList<bookInfo> searchedInfo ;
+	private LinkedStack<bookInfo> infoInStack ;
 	//from input File
 	private ArrayList<String> ISBNlist ;
 	//for Apache CLI
@@ -37,7 +39,7 @@ public class kabosuBookDataMaker{
 		}else return;
 
 		searchedInfo = new ArrayList<bookInfo>();
-		
+		infoInStack = new LinkedStack<bookInfo>();
 		/* if you use getLines, exception handling doesn't be required.
 		* Exception handling was implemented in getLines.
 		*/
@@ -133,6 +135,7 @@ public class kabosuBookDataMaker{
 				System.out.println("\"/t <Book Title>\" : book info by Title Search");
 				System.out.println("\"/d <index>\" : delete book Info by index which you can check with \"/show\"");
 				System.out.println("\"/delete all\" : clear all book Info");
+				System.out.println("\"/reverse\" : reverse Info order");
 				System.out.println("\"/save\" : save bookInfo to excel file");
 				System.out.println("\"/save <file name>\" : save bookInfo to <excel file>");
 				System.out.println("\"/set boxnumber <num>\" : set boxnumber in bookInfo");
@@ -201,6 +204,16 @@ public class kabosuBookDataMaker{
 				Thread st = new Thread(new SearchThread(searchedInfo,keyword,1,boxnumber));
 				st.start();
 				st.join();
+			}
+
+			else if (command.equals("/reverse")){
+				for(bookInfo b : searchedInfo){
+					infoInStack.push(b);
+				}
+				searchedInfo.clear();
+				while(!infoInStack.isEmpty()){
+					searchedInfo.add(infoInStack.pop());
+				}
 			}
 
 			else if(command.indexOf("/")==0){

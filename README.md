@@ -62,11 +62,11 @@ this program requires -o \<outputfile> file path for saving output file.
 
 ~README.md /help 기능 정리~    
 ~first line~
-~price format~
+~price format~  
 ~***thread & url error***~  
 ~custom exception~  
 ~ISBN 둘다 있으면 하나만~  
-generics  
+~generics~(reverse를 위한 LinkedStack을 generics로 구현했다.)  
 ~/save csv~
 
 ---
@@ -78,3 +78,4 @@ distribuiton으로 만든 bat파일로 실행할 때 (window CMD창에서)
 
 1. thread가 높은 확률로 접속이 안됨  
 2. 책 검색 결과가 한글일 때 깨짐...   
+3. 윈도우에서 왜 많은 기능이 안되는지 이해가 안됨 ..(내가 생각하는 가장 유력한 근거는 UTF-8관련 cmd에러) 
