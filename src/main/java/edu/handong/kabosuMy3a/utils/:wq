@@ -106,7 +106,7 @@ public class SearchThread implements Runnable{
 
 		URL url ;
 		int start = 0;
-		final int MAX_DISPLAY = 8;
+		final static int MAX_DISPLAY = 8;
 		URLConnection URLcon;
 		try{
 	    		if(option == 0 || option ==2){
