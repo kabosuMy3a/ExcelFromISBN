@@ -59,8 +59,7 @@ public class Utils{
 		rowInput.add("No"); rowInput.add("Title"); rowInput.add("Author"); 
 		rowInput.add("Publisher"); rowInput.add("EA"); rowInput.add("Pub-Year"); 
 		rowInput.add("ISBN"); rowInput.add("Donator"); rowInput.add("Donate-Date"); 
-		rowInput.add("Price"); rowInput.add("etc"); rowInput.add("boxnumber");
-		
+		rowInput.add("Price"); rowInput.add("etc"); rowInput.add("boxnumber");		
 		XSSFRow row = sheet.createRow(rownum++);
 		int cellnum = 0;
 		for(String cellInput : rowInput){
@@ -69,7 +68,6 @@ public class Utils{
 		}
 		rowInput = null;
 
-		//XSSFCell cell = row.createCell(cellnum++);	
 		for(bookInfo bI :searchedList){
 			
 			row = sheet.createRow(rownum++);
@@ -142,7 +140,6 @@ public class Utils{
                 }
 
                 outputStream.close();
-                //System.out.println("File Writtened Successfully");
         }
 	
 }

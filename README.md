@@ -22,8 +22,11 @@ this program requires -o \<outputfile> file path for saving output file.
 	If you activate -c you can input ISBN code in cli.   
 	After that this program's threads will find bookInfo from naverAPI and printout in cli.  
 	Then, threads save bookInfo in ArrayList.  
-	you can use '/t' also if you want to search by book name(e.g. /t 아침에는 죽음을 생각).  
 	
+	you can use '/t' also if you want to search by book name(e.g. /t 아침에는 죽음을 생각).  
+	If you use '/t' program displays 8 most-relative book information.  
+	You should choose one of them to save or input 0 if you don't want to save.   
+
 	please input '/help' first, then you can check all cli functions. 
 
 

@@ -27,9 +27,11 @@ public class SearchThread implements Runnable{
 
 	public SearchThread(ArrayList<bookInfo> searchedInfo, String keyword, int option,int boxnumber){
 		
-		//option 0 : default(ISBN)
-		//option 1 : Title Search
-		//option 2 : ISBN Search 
+		/*
+		 * option 0 : default(ISBN)
+		 * option 1 : Title Search
+		 * option 2 : ISBN Search 
+		 */
 		this.option = option;
 		this.keyword = keyword;
 		this.boxnumber = boxnumber;
@@ -41,12 +43,11 @@ public class SearchThread implements Runnable{
 	@Override
 	public void run(){
 
-		searching();
-		
+		searching();	
 		int index = 0 ;
-			
+		
 		try{
-			if(infoList.isEmpty()) throw new searchFailedException() ;
+			if(infoList.isEmpty()) throw new searchFailedException() ;		
 		
 		}catch(searchFailedException e){
 			ArrayList<String> errorlog = new ArrayList<String>() ;
@@ -55,14 +56,11 @@ public class SearchThread implements Runnable{
 			System.out.println(e.getMessage());
 			return;
 		}
-
-
 		for(bookInfo b : infoList){
 			System.out.println(Integer.toString(++index));
 			System.out.println(b.toString());
 			System.out.println();	
 		}	
-
 		if(option == 1)/*title search*/{	
 			
 			bookInfo infoToReturn = null;

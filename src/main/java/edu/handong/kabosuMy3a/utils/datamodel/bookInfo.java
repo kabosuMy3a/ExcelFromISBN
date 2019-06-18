@@ -81,17 +81,17 @@ public class bookInfo{
 	private void setBookInfoToList(){
 		
 		bookInfoToList = new ArrayList<String>();
-		bookInfoToList.add(null);
+		bookInfoToList.add(null);//No.
 		bookInfoToList.add(title);
 		bookInfoToList.add(author);
 		bookInfoToList.add(publisher);
-		bookInfoToList.add(null);
+		bookInfoToList.add(null);//EA
 		bookInfoToList.add(pubDate);
 		bookInfoToList.add(ISBN);
-		bookInfoToList.add(null);
-		bookInfoToList.add(null);
+		bookInfoToList.add(null);//Donator
+		bookInfoToList.add(null);//Donate-date
 		bookInfoToList.add(price);
-		bookInfoToList.add(null);
+		bookInfoToList.add(null);//etc
 		bookInfoToList.add(Integer.toString(boxnumber));
 	}
 

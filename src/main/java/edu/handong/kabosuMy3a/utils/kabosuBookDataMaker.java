@@ -40,9 +40,6 @@ public class kabosuBookDataMaker{
 
 		searchedInfo = new ArrayList<bookInfo>();
 		infoInStack = new LinkedStack<bookInfo>();
-		/* if you use getLines, exception handling doesn't be required.
-		* Exception handling was implemented in getLines.
-		*/
 
 		if(ISBNPath != null){
 			int numOfCoresInMyCpu = Runtime.getRuntime().availableProcessors();
@@ -53,7 +50,6 @@ public class kabosuBookDataMaker{
 			}catch(Exception e){
 				e.printStackTrace();
 			}
-			//saveWithoutPOI();
 			Utils.saveWithPOI(searchedInfo,resultPath);
 		}		
 		
@@ -91,30 +87,6 @@ public class kabosuBookDataMaker{
 		while(!executor.isTerminated()){
 		}
 	}
-
-	/*
-	private void saveWithoutPOI(){
-
-		ArrayList<String> forSave = new ArrayList<String>();
-		for(bookInfo b : searchedInfo){
-			forSave.add(b.toString());
-		}
-		Utils.writeAFile(forSave,resultPath);
-		System.out.println("Saved in "+ resultPath);
-
-	}
-
-	private void saveWithoutPOI(String savePath){
-
-		ArrayList<String> forSave = new ArrayList<String>();
-		for(bookInfo b : searchedInfo){
-			forSave.add(b.toString());
-		}
-		Utils.writeAFile(forSave,savePath);
-		System.out.println("Saved in "+ savePath);
-	}*/ 
-
-
 
 	private void searchWithCLI() throws Exception {
 
@@ -176,11 +148,9 @@ public class kabosuBookDataMaker{
 			}
 			else if(command.equals("/save")){
 				Utils.saveWithPOI(searchedInfo,resultPath);
-				//saveWithoutPOI();
 			}
 			else if(command.indexOf("/save ")==0){
 				int index = command.indexOf(" ")+1;
-				//saveWithoutPOI(command.substring(index));
 				Utils.saveWithPOI(searchedInfo,command.substring(index));
 			}
 
