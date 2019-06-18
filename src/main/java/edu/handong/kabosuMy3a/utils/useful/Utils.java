@@ -47,7 +47,7 @@ public class Utils{
 	public static void saveWithPOI(ArrayList<bookInfo> searchedList, String targetFileName){
 	
 		if (searchedList.isEmpty()){
-		       	System.out.println("List is empty");
+		       	System.out.println("List to save with Excel is empty");
 			return;
 		}
 
