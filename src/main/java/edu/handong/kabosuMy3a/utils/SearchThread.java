@@ -44,65 +44,32 @@ public class SearchThread implements Runnable{
 	public void run(){
 
 		searching();	
-		int index = 0 ;
 		
 		try{
 			if(infoList.isEmpty()) throw new searchFailedException() ;		
 		
 		}catch(searchFailedException e){
-			ArrayList<String> errorlog = new ArrayList<String>() ;
-			errorlog.add(keyword);
-			Utils.writeAFile(errorlog,"errorlog.txt") ;
+			
+			saveErrorLog(); 
 			System.out.println(e.getMessage());
 			return;
 		}
-		for(bookInfo b : infoList){
-			System.out.println(Integer.toString(++index));
-			System.out.println(b.toString());
-			System.out.println();	
-		}	
-		if(option == 1)/*title search*/{	
+		
+		printSearchedList();
+		
+		if(option == 1){	
 			
-			bookInfo infoToReturn = null;
+			returnInfoSearchedByTitle();
 
-			if (index > 1)/*searched result is more than 1*/{
-				System.out.print("*-input <one number> you want to save ");
-				System.out.println("if you don't want to save, input 0-*");
-				Scanner keyboard = new Scanner(System.in);
-				try{
-			    		int num = Integer.parseInt(keyboard.nextLine());
-					if(num !=0 && num <= infoList.size()){
-			    			infoToReturn = infoList.get(num-1);
-			    			System.out.print(Integer.toString(num)+" ");
-					}
-				}catch(Exception e){
-			    	System.out.println("**save failed  ");
-				}
-			
-			}else infoToReturn = infoList.get(0);
-
-			synchronized(searchedInfo){
-				if (infoToReturn != null){			
-					searchedInfo.add(infoToReturn);
-					System.out.println("saved successfully");
-				}	
-			}
-		}else/*ISBN Search*/{
-			int resultNum = 0;
-			synchronized(searchedInfo){
-				for(bookInfo bI : infoList){
-					searchedInfo.add(bI);
-					resultNum ++;
-					System.out.println((resultNum > 1
-							?Integer.toString(resultNum)+" "
-							:"")+"saved successfully"); 
-				}
-			}
+		}else{
+	
+			returnInfoSearchedByISBN();	
 		}
+
 		return ;
 	}
 
-	public void searching(){
+	private void searching(){
 
 		URL url ;
 		int start = 0;
@@ -191,5 +158,68 @@ public class SearchThread implements Runnable{
 			
 			   e.printStackTrace();
 		   }
+	}
+	
+	private void printSearchedList(){
+		
+		int index  = 0; 
+
+		for(bookInfo b : infoList){
+			System.out.println(Integer.toString(++index));
+			System.out.println(b.toString());
+			System.out.println();	
+		}
+	}
+	
+	private void saveErrorLog(){
+
+		ArrayList<String> errorlog = new ArrayList<String>() ;
+		errorlog.add(keyword);
+		Utils.writeAFile(errorlog,"errorlog.txt") ;
+
+	}
+
+
+	private void returnInfoSearchedByTitle(){
+		
+		bookInfo infoToReturn = null;
+
+			if ( infoList.size() > 1){
+				System.out.print("*-input <one number> you want to save ");
+				System.out.println("if you don't want to save, input 0-*");
+				Scanner keyboard = new Scanner(System.in);
+				try{
+			    		int num = Integer.parseInt(keyboard.nextLine());
+					if(num !=0 && num <= infoList.size()){
+			    			infoToReturn = infoList.get(num-1);
+			    			System.out.print(Integer.toString(num)+" ");
+					}
+				}catch(Exception e){
+			    	System.out.println("**save failed  ");
+				}
+			
+			}else infoToReturn = infoList.get(0);
+
+			synchronized(searchedInfo){
+				if (infoToReturn != null){			
+					searchedInfo.add(infoToReturn);
+					System.out.println("saved successfully");
+				}	
+			}
+
+	}
+
+	private void returnInfoSearchedByISBN(){
+
+		int resultNum = 0;
+		synchronized(searchedInfo){
+			for(bookInfo bI : infoList){
+				searchedInfo.add(bI);
+				resultNum ++;
+				System.out.println((resultNum > 1
+							?Integer.toString(resultNum)+" "
+							:"")+"saved successfully"); 
+			}
+		}
 	}
 }
