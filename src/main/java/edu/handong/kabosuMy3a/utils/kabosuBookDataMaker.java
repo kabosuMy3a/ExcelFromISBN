@@ -12,7 +12,7 @@ import java.util.concurrent.Executors;
 import org.apache.commons.cli.*;
 
 
-public class kabosuBookDataMaker{
+public class kabosuBookDataMaker implements CLIOptionable{
 	
 	//for convert excel file
 	private ArrayList<bookInfo> searchedInfo ;
@@ -200,7 +200,7 @@ public class kabosuBookDataMaker{
 	}
 
 
-	private Options createOptions(){
+	public Options createOptions(){
 
 		Options options = new Options();
 		
@@ -237,7 +237,7 @@ public class kabosuBookDataMaker{
 		return options ;
 	}
 
-	private void printHelp(Options options){
+	public void printHelp(Options options){
 
 		HelpFormatter formatter = new HelpFormatter();
 		String header = "KabosuMy3a Book Data Search & Save";
@@ -246,7 +246,7 @@ public class kabosuBookDataMaker{
 		formatter.printHelp("KabosuBookDataMaker", header, options, footer, true);
 	}
 
-	private boolean parseOptions(Options options, String[] args){
+	public boolean parseOptions(Options options, String[] args){
 
 
 		CommandLineParser parser = new DefaultParser();

@@ -39,8 +39,8 @@ public class LinkedStack<T> {
 		return count ;
 	}
 
-	public T pop(){
-		if (top==null) return null;
+	public T pop() throws popFromEmptyStackException{
+		if (top==null) throw new popFromEmptyStackException();
 		T topItem = top.data ;
 		top = top.link ;
 		count--;
