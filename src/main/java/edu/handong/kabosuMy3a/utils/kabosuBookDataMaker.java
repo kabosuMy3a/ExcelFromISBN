@@ -22,7 +22,6 @@ public class kabosuBookDataMaker implements CLIOptionable{
 	//for Apache CLI
 	private String resultPath ;	
 	private boolean cliMenu ;
-	//private String titlePath;
 	private String ISBNPath;
 	private boolean help;
 	private int boxnumber = 0 ;

@@ -44,28 +44,19 @@ public class SearchThread implements Runnable{
 	public void run(){
 
 		searching();	
-		
 		try{
-			if(infoList.isEmpty()) throw new searchFailedException() ;		
-		
+			if(infoList.isEmpty()) throw new searchFailedException() ;			
 		}catch(searchFailedException e){
-			
 			saveErrorLog(); 
 			System.out.println(e.getMessage());
 			return;
 		}
-		
 		printSearchedList();
-		
 		if(option == 1){	
-			
 			returnInfoSearchedByTitle();
-
 		}else{
-	
 			returnInfoSearchedByISBN();	
 		}
-
 		return ;
 	}
 
