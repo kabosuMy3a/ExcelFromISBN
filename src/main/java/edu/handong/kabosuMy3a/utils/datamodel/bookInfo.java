@@ -23,6 +23,12 @@ public class bookInfo{
 		bookInfoToList= new ArrayList<String>();
 	}
 
+	public bookInfo(String title){
+
+		bookInfoToList = new ArrayList<String>();
+		this.title = title;
+	}
+
 	public void setTitle(String title){
 	
 		title = title.replaceAll("\\<[^>]*>","");		

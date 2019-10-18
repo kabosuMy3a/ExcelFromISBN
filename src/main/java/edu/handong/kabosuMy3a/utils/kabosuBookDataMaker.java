@@ -104,6 +104,7 @@ public class kabosuBookDataMaker implements CLIOptionable{
 				System.out.println(partition);
 				System.out.println("Input ISBN code to find book Info");
 				System.out.println("\"/t <Book Title>\" : book info by Title Search");
+				System.out.println("\"/push <Book Title>\" : add book info consists of only title in the list ");
 				System.out.println("\"/d <index>\" : delete book Info by index which you can check with \"/show\"");
 				System.out.println("\"/delete all\" : clear all book Info");
 				System.out.println("\"/reverse\" : reverse Info order");
@@ -167,6 +168,16 @@ public class kabosuBookDataMaker implements CLIOptionable{
 				boxnumber = Integer.parseInt(command.substring(index));
 				System.out.println("boxnumber set by "+command.substring(index));
 			}
+
+			else if(command.indexOf("/push ")==0){
+				int index = command.indexOf(" ")+1 ;
+				String keyword = command.substring(index) ;
+				bookInfo coin = new bookInfo(keyword);
+				coin.setBoxNumber(boxnumber);
+				searchedInfo.add(coin);
+				System.out.println(keyword+" pushed to list successfully");
+			}
+
 			else if(command.indexOf("/t ")==0){
 				int index = command.indexOf(" ")+1 ;
 				String keyword = command.substring(index) ;
