@@ -59,7 +59,7 @@ public class Utils{
 		rowInput.add("No"); rowInput.add("Title"); rowInput.add("Author"); 
 		rowInput.add("Publisher"); rowInput.add("EA"); rowInput.add("Pub-Year"); 
 		rowInput.add("ISBN"); rowInput.add("Donator"); rowInput.add("Donate-Date"); 
-		rowInput.add("Price"); rowInput.add("etc"); rowInput.add("boxnumber");		
+		rowInput.add("Price"); rowInput.add("boxnumber"); rowInput.add("etc");		
 		XSSFRow row = sheet.createRow(rownum++);
 		int cellnum = 0;
 		for(String cellInput : rowInput){

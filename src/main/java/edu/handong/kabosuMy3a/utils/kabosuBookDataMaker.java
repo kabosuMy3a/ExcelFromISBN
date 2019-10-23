@@ -104,7 +104,12 @@ public class kabosuBookDataMaker implements CLIOptionable{
 				System.out.println(partition);
 				System.out.println("Input ISBN code to find book Info");
 				System.out.println("\"/t <Book Title>\" : book info by Title Search");
-				System.out.println("\"/push <Book Title>\" : add book info consists of only title in the list ");
+				System.out.println("\"/push <Book Title>\" : push book info consists of only title in the list ");
+				System.out.println("\"/pau <Author>\" : push Author to Last bookInfo");
+				System.out.println("\"/ppu <Publisher>\" : push Author to Last bookInfo");
+				System.out.println("\"/pda <Date>\" : push Date to Last bookInfo");
+				System.out.println("\"/pis <ISBN>\" : push Author to Last bookInfo");
+				System.out.println("\"/ppr <Price>\" : push Author to Last bookInfo");
 				System.out.println("\"/d <index>\" : delete book Info by index which you can check with \"/show\"");
 				System.out.println("\"/delete all\" : clear all book Info");
 				System.out.println("\"/reverse\" : reverse Info order");
@@ -142,6 +147,37 @@ public class kabosuBookDataMaker implements CLIOptionable{
 				}
 				
 			}
+
+			else if(command.indexOf("/pau ")==0){
+				int index = command.indexOf(" ")+1 ;
+				String keyword = command.substring(index);
+				searchedInfo.get(searchedInfo.size()-1).pushAuthor(keyword);
+			}
+
+			else if(command.indexOf("/ppu ")==0){
+				int index = command.indexOf(" ")+1 ;
+				String keyword = command.substring(index);
+				searchedInfo.get(searchedInfo.size()-1).pushPublisher(keyword);
+			}
+		
+			else if(command.indexOf("/pda ")==0){
+				int index = command.indexOf(" ")+1 ;
+				String keyword = command.substring(index);
+				searchedInfo.get(searchedInfo.size()-1).pushPubDate(keyword);
+			}
+
+			else if(command.indexOf("/pis ")==0){
+				int index = command.indexOf(" ")+1 ;
+				String keyword = command.substring(index);
+				searchedInfo.get(searchedInfo.size()-1).pushISBN(keyword);
+			}
+
+			else if(command.indexOf("/ppr ")==0){
+				int index = command.indexOf(" ")+1 ;
+				String keyword = command.substring(index);
+				searchedInfo.get(searchedInfo.size()-1).pushPrice(keyword);
+			}
+
 			else if(command.equals("/delete all")){
 				searchedInfo.clear();
 				System.out.println("All book information deleted");

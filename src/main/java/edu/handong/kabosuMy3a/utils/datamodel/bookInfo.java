@@ -42,9 +42,17 @@ public class bookInfo{
 		this.author = author;
 	}
 
+	public void pushAuthor(String author){
+		this.author = author;
+	}
+
 	public void setPublisher(String publisher){
 
 		this.publisher = publisher ;
+	}
+
+	public void pushPublisher(String publisher){
+		this.publisher = publisher;
 	}
 
 	public void setPubDate(String pubDate){	
@@ -52,6 +60,10 @@ public class bookInfo{
 			pubDate = pubDate.substring(0,4);
 		this.pubDate = pubDate ; 
 
+	}
+
+	public void pushPubDate(String pubDate){
+		this.pubDate = pubDate;
 	}
 
 	public void setISBN(String ISBN){
@@ -65,6 +77,10 @@ public class bookInfo{
 		}
 		this.ISBN = ISBN;
 
+	}
+
+	public void pushISBN(String ISBN){
+		this.ISBN = ISBN;
 	}
 	
 	public void setPrice(String price){
@@ -80,10 +96,15 @@ public class bookInfo{
 
 	}
 
+	public void pushPrice(String price){
+		this.price = price;
+	}
+
+
 	public void setBoxNumber(int boxnumber){
 		this.boxnumber = boxnumber;
-	}
-	
+	}	
+
 	private void setBookInfoToList(){
 		
 		bookInfoToList = new ArrayList<String>();
@@ -97,8 +118,8 @@ public class bookInfo{
 		bookInfoToList.add(null);//Donator
 		bookInfoToList.add(null);//Donate-date
 		bookInfoToList.add(price);
-		bookInfoToList.add(null);//etc
 		bookInfoToList.add(Integer.toString(boxnumber));
+		bookInfoToList.add(null);//etc
 	}
 
 	public ArrayList<String> getBookInfoToList(){
