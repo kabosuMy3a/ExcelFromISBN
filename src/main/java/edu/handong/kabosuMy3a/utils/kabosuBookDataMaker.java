@@ -171,6 +171,16 @@ public class kabosuBookDataMaker implements CLIOptionable{
 				String keyword = command.substring(index);
 				searchedInfo.get(searchedInfo.size()-1).pushISBN(keyword);
 			}
+		
+			else if(command.indexOf("/pea ")==0){
+				try{
+					int index = command.indexOf(" ")+1 ;
+					int keyword = Integer.parseInt(command.substring(index));
+					searchedInfo.get(searchedInfo.size()-1).setEA(keyword);
+				}catch(Exception e){
+					System.out.println(e);
+				}
+			}
 
 			else if(command.indexOf("/ppr ")==0){
 				int index = command.indexOf(" ")+1 ;
@@ -200,9 +210,13 @@ public class kabosuBookDataMaker implements CLIOptionable{
 				
 			}
 			else if(command.indexOf("/set boxnumber ")==0){
-				int index = command.indexOf(" ",5)+1 ;
-				boxnumber = Integer.parseInt(command.substring(index));
-				System.out.println("boxnumber set by "+command.substring(index));
+				try{
+					int index = command.indexOf(" ",5)+1 ;
+					boxnumber = Integer.parseInt(command.substring(index));
+					System.out.println("boxnumber set by "+command.substring(index));
+				}catch(Exception e){
+					System.out.println(e);
+				}
 			}
 
 			else if(command.indexOf("/push ")==0){

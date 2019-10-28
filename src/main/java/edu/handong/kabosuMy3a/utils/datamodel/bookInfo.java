@@ -11,6 +11,7 @@ public class bookInfo{
 	private String author = null ;
 	private String publisher = null ;
 	private String pubDate = null ;
+	private int EA = 1 ;
 	private String ISBN = null ;
 	private String price = null ;
 	private int boxnumber = 0x0;
@@ -105,6 +106,10 @@ public class bookInfo{
 		this.boxnumber = boxnumber;
 	}	
 
+	public void setEA(int EA){
+		this.EA = EA;
+	}
+
 	private void setBookInfoToList(){
 		
 		bookInfoToList = new ArrayList<String>();
@@ -112,7 +117,7 @@ public class bookInfo{
 		bookInfoToList.add(title);
 		bookInfoToList.add(author);
 		bookInfoToList.add(publisher);
-		bookInfoToList.add(null);//EA
+		bookInfoToList.add(Integer.toString(EA));//EA
 		bookInfoToList.add(pubDate);
 		bookInfoToList.add(ISBN);
 		bookInfoToList.add(null);//Donator
@@ -131,7 +136,8 @@ public class bookInfo{
 	public String toString(){
 		
 		return title+"/"+author+"/"+publisher+"/"
-			+pubDate+"/"+ISBN+"/"+price+"/"
+			+pubDate+"/"+Integer.toString(EA)
+			+"/"+ISBN+"/"+price+"/"
 			+Integer.toString(boxnumber) ;
 	}
 
