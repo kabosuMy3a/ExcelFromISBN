@@ -83,7 +83,7 @@ public class SearchThread implements Runnable{
 			XmlPullParserFactory factory; 
            		factory = XmlPullParserFactory.newInstance();
             		XmlPullParser parser = factory.newPullParser();
-			parser.setInput(new InputStreamReader(URLcon.getInputStream()));
+			parser.setInput(new InputStreamReader(URLcon.getInputStream(),"UTF-8"));
 
 			int eventType = parser.getEventType();
 			bookInfo bI = null ;

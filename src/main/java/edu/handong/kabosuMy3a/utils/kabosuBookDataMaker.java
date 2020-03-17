@@ -110,6 +110,7 @@ public class kabosuBookDataMaker implements CLIOptionable{
 				System.out.println("\"/pda <Date>\" : push Date to Last bookInfo");
 				System.out.println("\"/pis <ISBN>\" : push Author to Last bookInfo");
 				System.out.println("\"/ppr <Price>\" : push Author to Last bookInfo");
+				System.out.println("\"/pea <EA>\" : push EA(the number of book) to Last bookInfo");
 				System.out.println("\"/d <index>\" : delete book Info by index which you can check with \"/show\"");
 				System.out.println("\"/delete all\" : clear all book Info");
 				System.out.println("\"/reverse\" : reverse Info order");
